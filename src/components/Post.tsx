@@ -1,10 +1,15 @@
+import classes from './Post.module.css';
+
 function Post(props: any) {
+  if (props.author === '' && props.body === '') {
+    return <></>;
+  }
   return (
-    <div className="post" style={{ color: 'blue', textAlign: 'right' }}>
+    <li className={classes.post}>
       <p>{props.body}</p>
       <hr />
       <p>{props.author}</p>
-    </div>
+    </li>
   );
 }
 
