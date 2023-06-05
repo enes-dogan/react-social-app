@@ -4,6 +4,7 @@ export const NewPost = (props: any) => {
   function prevent(event: any) {
     event.preventDefault();
   }
+
   return (
     <form className={classes.form} onSubmit={prevent}>
       <p>
