@@ -2,15 +2,14 @@ import { MdPostAdd, MdMessage } from 'react-icons/md';
 
 import classes from './MainHeader.module.css';
 
-function MainHeader({onCreatePost :any}) {
+function MainHeader(props: any) {
   return (
     <header className={classes.header}>
-      ;
       <h1 className={classes.logo}>
-        <MdMessage> React Testing</MdMessage>
+        <MdMessage /> React Testing
       </h1>
       <p>
-        <button className={classes.button} onClick={onCreatePost}>
+        <button className={classes.button} onClick={props.onCreatePost}>
           <MdPostAdd size={18} />
           New Post
         </button>
