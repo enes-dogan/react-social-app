@@ -1,11 +1,11 @@
 import classes from './Post.module.css';
 
-function Post(props: any) {
+function Post({ author, body }) {
   return (
     <li className={classes.post}>
-      <p>{props.body}</p>
+      <p>{body}</p>
       <hr />
-      <p>{props.author}</p>
+      <p>{author}</p>
     </li>
   );
 }
