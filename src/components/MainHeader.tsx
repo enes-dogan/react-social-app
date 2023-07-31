@@ -1,8 +1,12 @@
+import classes from './MainHeader.module.css';
+
 import { MdPostAdd, MdMessage } from 'react-icons/md';
 
-import classes from './MainHeader.module.css';
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-function MainHeader({ onCreatePost }:{onCreatePost: any}) {
+interface MainHeaderProps {
+  onCreatePost: () => void;
+}
+
+function MainHeader({ onCreatePost }: MainHeaderProps) {
   return (
     <header className={classes.header}>
       <h1 className={classes.logo}>

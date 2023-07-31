@@ -1,27 +1,25 @@
 import Post from './Post';
 import Modal from './Modal';
 import NewPost from './NewPost';
+
 import classes from './PostsList.module.css';
+
 import { useState } from 'react';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const PostsList = ({
-  isPosting,
-  onStopPosting,
-}: {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  isPosting: any;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  onStopPosting: any;
-}) => {
+interface PostsListProps {
+  isPosting: boolean;
+  onStopPosting: () => void;
+}
+
+export const PostsList = ({ isPosting, onStopPosting }: PostsListProps) => {
   const [enteredBody, setEnteredBody] = useState('React.js is the best');
   const [enteredAuthor, setEnteredAuthor] = useState('Enes Dogan');
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  function changeBodyHandler(event: any) {
+
+  function changeBodyHandler(event: React.ChangeEvent<HTMLTextAreaElement>) {
     setEnteredBody(event.target.value);
   }
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  function changeAuthorHandler(event: any) {
+
+  function changeAuthorHandler(event: React.ChangeEvent<HTMLInputElement>) {
     setEnteredAuthor(event.target.value);
   }
 

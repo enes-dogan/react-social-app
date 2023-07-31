@@ -1,5 +1,6 @@
 import MainHeader from './components/MainHeader';
 import PostsList from './components/PostsList';
+
 import { useState } from 'react';
 
 function App() {
