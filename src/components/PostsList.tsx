@@ -4,26 +4,31 @@ import NewPost from './NewPost';
 import classes from './PostsList.module.css';
 import { useState } from 'react';
 
-export const PostsList = (props: any) => {
-  const [modalIsVisible, setModalIsVisible] = useState(true);
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const PostsList = ({
+  isPosting,
+  onStopPosting,
+}: {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  isPosting: any;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  onStopPosting: any;
+}) => {
   const [enteredBody, setEnteredBody] = useState('React.js is the best');
   const [enteredAuthor, setEnteredAuthor] = useState('Enes Dogan');
-
-  function hideModalHandler(event: any) {
-    setModalIsVisible(false);
-  }
-
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function changeBodyHandler(event: any) {
     setEnteredBody(event.target.value);
   }
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function changeAuthorHandler(event: any) {
     setEnteredAuthor(event.target.value);
   }
 
   return (
     <>
-      {modalIsVisible ? (
-        <Modal onClose={hideModalHandler} isModalOpen={modalIsVisible}>
+      {isPosting ? (
+        <Modal onClose={onStopPosting}>
           <NewPost
             onBodyChange={changeBodyHandler}
             onAuthorChange={changeAuthorHandler}

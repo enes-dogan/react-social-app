@@ -1,7 +1,7 @@
-import React from 'react';
 import classes from './Modal.module.css';
 
-const Modal = ({ children, onClose }) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const Modal = ({ children, onClose }:{children:any, onClose:any}) => {
   return (
     <>
       <div className={classes.backdrop} onClick={onClose} />

@@ -1,5 +1,5 @@
 import classes from './NewPost.module.css';
-
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const NewPost = (props: any) => {
   return (
     <form className={classes.form}>
