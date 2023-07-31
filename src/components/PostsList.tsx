@@ -10,33 +10,30 @@ interface PostsListProps {
   isPosting: boolean;
   onStopPosting: () => void;
 }
+interface PostData {
+  author: string;
+  body: string;
+}
 
 export const PostsList = ({ isPosting, onStopPosting }: PostsListProps) => {
-  const [enteredBody, setEnteredBody] = useState('React.js is the best');
-  const [enteredAuthor, setEnteredAuthor] = useState('Enes Dogan');
+  const [posts, setPosts] = useState<PostData[]>([]);
 
-  function changeBodyHandler(event: React.ChangeEvent<HTMLTextAreaElement>) {
-    setEnteredBody(event.target.value);
-  }
-
-  function changeAuthorHandler(event: React.ChangeEvent<HTMLInputElement>) {
-    setEnteredAuthor(event.target.value);
+  function addPostHandler(postData: PostData) {
+    setPosts((existingPosts) => [postData, ...existingPosts]);
   }
 
   return (
     <>
-      {isPosting ? (
+      {isPosting && (
         <Modal onClose={onStopPosting}>
-          <NewPost
-            onBodyChange={changeBodyHandler}
-            onAuthorChange={changeAuthorHandler}
-          />
+          <NewPost onCancel={onStopPosting} onAddPost={addPostHandler} />
         </Modal>
-      ) : null}
+      )}
 
       <ul className={classes.posts}>
-        <Post author={enteredAuthor} body={enteredBody} />
-        <Post author='Enver Usta' body='Angular.js is the best js framework' />
+        {posts.map((post) => (
+          <Post key={post.body} author={post.author} body={post.body} />
+        ))}
       </ul>
     </>
   );
