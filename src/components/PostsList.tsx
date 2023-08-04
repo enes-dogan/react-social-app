@@ -1,7 +1,4 @@
 import Post from './Post';
-import Modal from './Modal';
-import NewPost from './NewPost';
-
 import classes from './PostsList.module.css';
 
 import { useState, useEffect } from 'react';
@@ -15,7 +12,7 @@ interface PostData {
   body: string;
 }
 
-export const PostsList = ({ isPosting, onStopPosting }: PostsListProps) => {
+export const PostsList = () => {
   const [posts, setPosts] = useState<PostData[]>([]);
   const [isFetching, setIsFetching] = useState(false);
 
@@ -45,11 +42,6 @@ export const PostsList = ({ isPosting, onStopPosting }: PostsListProps) => {
 
   return (
     <>
-      {isPosting && (
-        <Modal onClose={onStopPosting}>
-          <NewPost onCancel={onStopPosting} onAddPost={addPostHandler} />
-        </Modal>
-      )}
       {!isFetching && posts.length > 0 && (
         <ul className={classes.posts}>
           {posts.map((post) => (
