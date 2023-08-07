@@ -3,6 +3,10 @@ import { Link, Form, redirect } from 'react-router-dom';
 import classes from './NewPost.module.css';
 import Modal from '../components/Modal';
 
+interface CustomRequest extends Request {
+  formData: () => Promise<FormData>;
+}
+
 function NewPost() {
   return (
     <Modal>
@@ -27,8 +31,8 @@ function NewPost() {
 }
 
 export default NewPost;
-
-export async function action({ request }) {// data.request is the incoming request object from the client.
+/* eslint-disable react-refresh/only-export-components */
+export async function action({ request }: { request: CustomRequest }) {// data.request is the incoming request object from the client.]
   const formData = await request.formData();
   // formData.get('body');
   // formData.get('author');

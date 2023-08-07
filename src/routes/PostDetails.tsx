@@ -3,8 +3,17 @@ import { useLoaderData, Link } from 'react-router-dom';
 import Modal from '../components/Modal';
 import classes from './PostDetails.module.css';
 
+interface CustomRequest extends Request {
+  postId: () => Promise<FormData>;
+}
+
+interface PostTypes {
+  author: string;
+  body: string;
+}
+
 function PostDetails() {
-  const post = useLoaderData();
+  const post = useLoaderData() as PostTypes;
 
   if (!post) {
     return (
@@ -33,7 +42,8 @@ function PostDetails() {
 
 export default PostDetails;
 
-export async function loader({ params }) { // data.params is the params object from the route.
+/* eslint-disable react-refresh/only-export-components */
+export async function loader({ params }: { params: CustomRequest }) { // data.params is the params object from the route.
   const response = await fetch('http://localhost:8080/posts/' + params.postId);
   const resData = await response.json();
   return resData.post;

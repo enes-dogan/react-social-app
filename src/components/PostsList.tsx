@@ -3,8 +3,14 @@ import { useLoaderData } from 'react-router-dom';
 import Post from './Post';
 import classes from './PostsList.module.css';
 
+interface Posts {
+  id: string;
+  body: string;
+  author: string;
+}
+
 function PostsList() {
-  const posts = useLoaderData();
+  const posts = useLoaderData() as Posts[];
 
   return (
     <>

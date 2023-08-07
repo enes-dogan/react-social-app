@@ -11,7 +11,6 @@ function Post({ id, author, body }: PostProps) {
     <li className={classes.post}>
       <Link to={id}>
         <p className={classes.author}>{author}</p>
-        <hr />
         <p className={classes.text}>{body}</p>
       </Link>
     </li>
