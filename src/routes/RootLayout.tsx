@@ -1,8 +1,8 @@
-import { Outlet } from 'react-router-dom'
+import { Outlet } from 'react-router-dom';
 
-import MainHeader from "../components/MainHeader"
+import MainHeader from '../components/MainHeader';
 
-const RootLayout = () => {
+function RootLayout() {
   return (
     <>
       <MainHeader />
@@ -11,4 +11,4 @@ const RootLayout = () => {
   );
 }
 
-export default RootLayout
+export default RootLayout;

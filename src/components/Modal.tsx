@@ -6,10 +6,11 @@ interface ModalProps {
   children: React.ReactNode;
 }
 
-const Modal: React.FC<ModalProps> = ({ children }) => {
+function Modal({ children }: ModalProps) {
   const navigate = useNavigate();
-  function closeHandler(params: any) {
-    navigate(-1);
+
+  function closeHandler() {
+    navigate('..');
   }
 
   return (
@@ -20,6 +21,6 @@ const Modal: React.FC<ModalProps> = ({ children }) => {
       </dialog>
     </>
   );
-};
+}
 
 export default Modal;

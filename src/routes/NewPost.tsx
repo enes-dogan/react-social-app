@@ -1,61 +1,46 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
-
-import Modal from '../components/Modal';
+import { Link, Form, redirect } from 'react-router-dom';
 
 import classes from './NewPost.module.css';
+import Modal from '../components/Modal';
 
-
-interface PostData {
-  author: string;
-  body: string;
-}
-
-interface NewPostProps {
-  onAddPost: (postData: PostData) => void;
-}
-
-const NewPost = ({  onAddPost }: NewPostProps) => {
-  const [enteredBody, setEnteredBody] = useState('React.js is the best');
-  const [enteredAuthor, setEnteredAuthor] = useState('Enes Dogan');
-
-  function changeBodyHandler(event: React.ChangeEvent<HTMLTextAreaElement>) {
-    setEnteredBody(event.target.value);
-  }
-
-  function changeAuthorHandler(event: React.ChangeEvent<HTMLInputElement>) {
-    setEnteredAuthor(event.target.value);
-  }
-
-  function submitHandler(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    const postData = { author: enteredAuthor, body: enteredBody };
-
-    onAddPost(postData);
-    onCancel();
-  }
-
+function NewPost() {
   return (
-    <>
-      <Modal>
-        <form className={classes.form} onSubmit={submitHandler}>
-          <p>
-            <label htmlFor='body'>Text</label>
-            <textarea id='body' required rows={3} onChange={changeBodyHandler} />
-          </p>
-          <p>
-            <label htmlFor='name'>Your Name</label>
-            <input type='text' id='name' required onChange={changeAuthorHandler} />
-          </p>
-          <p className={classes.actions}>
-            <Link to='..' type='button'>
-              Cancel
-            </Link>
-            <button>Submit</button>
-          </p>
-        </form>
-      </Modal>
-    </>
-  )
+    <Modal>
+      <Form method='post' className={classes.form}>
+        <p>
+          <label htmlFor="body">Text</label>
+          <textarea id="body" name="body" required rows={3} />
+        </p>
+        <p>
+          <label htmlFor="name">Your Name</label>
+          <input type="text" id="name" name="author" required />
+        </p>
+        <p className={classes.actions}>
+          <Link to=".." type="button">
+            Cancel
+          </Link>
+          <button>Submit</button>
+        </p>
+      </Form>
+    </Modal>
+  );
 }
+
 export default NewPost;
+
+export async function action({ request }) {// data.request is the incoming request object from the client.
+  const formData = await request.formData();
+  // formData.get('body');
+  // formData.get('author');
+  // OR
+  const postData = Object.fromEntries(formData); // { body: ... , author: ... }
+  await fetch('http://localhost:8080/posts', {
+    method: 'POST',
+    body: JSON.stringify(postData),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+
+  return redirect('/');
+}
